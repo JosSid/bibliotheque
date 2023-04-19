@@ -5,29 +5,14 @@
     $txtImage=(isset($_FILES['txtImage']['name']))?$_FILES['txtImage']['name']:"";
     $action=(isset($_POST['action']))?$_POST['action']:"";
 
-    echo $txtId."<br/>";
-    echo $txtName."<br/>";
-    echo $txtImage."<br/>";
-    echo $action."<br/>";
-
-    $host="localhost";
-    $bd="sitio";
-    $usuario="root";
-    $contraseña="";
-
-    try {
-        $connect=new PDO("mysql:host=$host;dbname=$bd",$usuario,$contraseña);
-        if($connect){echo "Connect to ".$bd." DB";}
-    } catch (Exception $ex) {
-        echo $ex->getMessage();
-    }
-
+    include("../config/bd.php");
     switch($action){
 
-        //INSERT INTO `books` (`id`, `name`, `image`) VALUES (NULL, 'Libro de php', 'imagen.jpg');
         case "add":
             echo "presionado boton add";
-            $sentenciaSQL = $connect->prepare("INSERT INTO `books` (`id`, `name`, `image`) VALUES (NULL, 'Libro de php', 'imagen.jpg')");
+            $sentenciaSQL = $connect->prepare("INSERT INTO books (name,image) VALUES (:name,:image);");
+            $sentenciaSQL->bindParam(':name',$txtName);
+            $sentenciaSQL->bindParam(':image',$txtImage);
             $sentenciaSQL->execute();
             break;
         case "modify":
