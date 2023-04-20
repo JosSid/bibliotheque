@@ -11,11 +11,24 @@
         case "add":
             $sentenceSQL = $connect->prepare("INSERT INTO books (name,image) VALUES (:name,:image);");
             $sentenceSQL->bindParam(':name',$txtName);
+
+            
             $sentenceSQL->bindParam(':image',$txtImage);
             $sentenceSQL->execute();
             break;
         case "modify":
-            echo "presionado boton modify";
+            $sentenceSQL = $connect->prepare("UPDATE books SET name=:name WHERE id=:id");
+            $sentenceSQL->bindParam(':name',$txtName);
+            $sentenceSQL->bindParam(':id',$txtId);
+            $sentenceSQL->execute();
+
+            if($txtImage != "") {
+                $sentenceSQL = $connect->prepare("UPDATE books SET image=:image WHERE id=:id");
+                $sentenceSQL->bindParam(':image',$txtImage);
+                $sentenceSQL->bindParam(':id',$txtId);
+                $sentenceSQL->execute();
+            }
+
             break;
         case "cancel":
             echo "presionado boton cancel";
@@ -28,7 +41,7 @@
 
             $txtName = $book['name'];
             $txtImage = $book['image'];
-            echo "presionado boton select";
+
             break;
         case "delete":
             $sentenceSQL = $connect->prepare("DELETE FROM books WHERE id=:id");
