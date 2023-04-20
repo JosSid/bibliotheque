@@ -20,6 +20,14 @@
         case "cancel":
             echo "presionado boton cancel";
             break;
+        case "select":
+            echo "presionado boton select";
+            break;
+        case "delete":
+            $sentenceSQL = $connect->prepare("DELETE FROM books WHERE id=:id");
+            $sentenceSQL->bindParam(':id',$txtId);
+            $sentenceSQL->execute();
+            break;
     }
 
     $sentenceSQL = $connect->prepare("SELECT * FROM books");
