@@ -22,6 +22,7 @@
             }
             $sentenceSQL->bindParam(':image',$fileName);
             $sentenceSQL->execute();
+            header("Location:books.php");
             break;
         case "modify":
             $sentenceSQL = $connect->prepare("UPDATE books SET name=:name WHERE id=:id");
@@ -52,11 +53,12 @@
                 $sentenceSQL->bindParam(':image',$fileName);
                 $sentenceSQL->bindParam(':id',$txtId);
                 $sentenceSQL->execute();
+                header("Location:books.php");
             }
 
             break;
         case "cancel":
-            echo "presionado boton cancel";
+            header("Location:books.php");
             break;
         case "select":
             $sentenceSQL = $connect->prepare("SELECT * FROM books WHERE id=:id");
@@ -83,6 +85,7 @@
             $sentenceSQL = $connect->prepare("DELETE FROM books WHERE id=:id");
             $sentenceSQL->bindParam(':id',$txtId);
             $sentenceSQL->execute();
+            header("Location:books.php");
             break;
     }
 
@@ -107,7 +110,7 @@
 
                 <div class="form-group">
                     <label for="txtName">Name</label>
-                    <input type="text" class="form-control" value="<?php echo $txtName; ?>" id="txtName" name="txtName" placeholder="Name">
+                    <input type="text" required class="form-control" value="<?php echo $txtName; ?>" id="txtName" name="txtName" placeholder="Name">
                 </div>
 
                 <div class="form-group">
