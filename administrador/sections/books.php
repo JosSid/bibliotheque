@@ -115,7 +115,7 @@
                     <?php echo $txtImage; ?>
                    <br/> 
                     <?php if($txtImage != "") { ?>
-                        <img src="../../img/<?php echo $fileName;?>" width="50" alt="image" />
+                        <img class="img-thumbnail rounded" src="../../img/<?php echo $fileName;?>" width="50" alt="image" />
                     <?php } ?>
                     <input type="file" class="form-control"  id="txtImage" name="txtImage" placeholder="Image">
                 </div>
@@ -152,7 +152,7 @@
                 <td><?php echo $book['id'];?></td>
                 <td><?php echo $book['name'];?></td>
                 <td>
-                    <img src="../../img/<?php echo $book['image'];?>" width="50" alt="image" />
+                    <img class="img-thumbnail rounded" src="../../img/<?php echo $book['image'];?>" width="50" alt="image" />
                 </td>
                 <td>
 
