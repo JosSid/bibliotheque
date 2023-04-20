@@ -1,6 +1,15 @@
 <?php
+    session_start();
     if($_POST){
-        header('Location:inicio.php');
+        if(($_POST['username']=='jossid')&&($_POST['password']=="1234"))
+{
+    $_SESSION['user']="ok";
+    $_SESSION['username']="Jossid";
+    header('Location:inicio.php');
+} else {
+    $message="ERROR: username or password not correct";
+}
+        
     }
 ?>
 
@@ -29,6 +38,11 @@
                     Login
                 </div>
                 <div class="card-body">
+                    <?php if(isset($message)) { ?>
+                    <div class="alert alert-danger" role="alert">
+                        <?php echo $message; ?>
+                    </div>
+                    <?php } ?>
                     <form  method="POST">
                     <div class = "form-group">
                     <label for="username">User</label>
