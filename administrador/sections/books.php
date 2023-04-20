@@ -102,7 +102,7 @@
 
                 <div class="form-group">
                     <label for="txtId">ID</label>
-                    <input type="text" class="form-control" value="<?php echo $txtId; ?>" id="txtId" name="txtId" placeholder="ID">
+                    <input type="text" required readonly class="form-control" value="<?php echo $txtId; ?>" id="txtId" name="txtId" placeholder="ID">
                 </div>
 
                 <div class="form-group">
@@ -115,15 +115,15 @@
                     <?php echo $txtImage; ?>
                    <br/> 
                     <?php if($txtImage != "") { ?>
-                        <img class="img-thumbnail rounded" src="../../img/<?php echo $fileName;?>" width="50" alt="image" />
+                        <img class="img-thumbnail rounded" src="../../img/<?php echo $txtImage;?>" width="50" alt="image" />
                     <?php } ?>
                     <input type="file" class="form-control"  id="txtImage" name="txtImage" placeholder="Image">
                 </div>
 
                 <div class="btn-group" role="group" aria-label="">
-                    <button type="submit" name="action" value="add" class="btn btn-success">ADD</button>
-                    <button type="submit" name="action" value="modify" class="btn btn-warning">MODIFY</button>
-                    <button type="submit" name="action" value="cancel" class="btn btn-info">CANCEL</button>
+                    <button type="submit" name="action" <?php echo ($action=="select")?"disabled":"" ?> value="add" class="btn btn-success">ADD</button>
+                    <button type="submit" name="action" <?php echo ($action!="select")?"disabled":"" ?> value="modify" class="btn btn-warning">MODIFY</button>
+                    <button type="submit" name="action" <?php echo ($action!="select")?"disabled":"" ?> value="cancel" class="btn btn-info">CANCEL</button>
                 </div>
 
             </form>
