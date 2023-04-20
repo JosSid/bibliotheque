@@ -30,8 +30,26 @@
             $sentenceSQL->execute();
 
             if($txtImage != "") {
+                $date = new DateTime();
+                $fileName = ($txtImage!="")?$date->getTimestamp()."_".$_FILES["txtImage"]["name"]:"imagen.jpg";
+
+                $tmpImage=$_FILES["txtImage"]["tmp_name"];
+
+                move_uploaded_file($tmpImage,"../../img/".$fileName);
+
+                $sentenceSQL = $connect->prepare("SELECT image FROM books WHERE id=:id");
+                $sentenceSQL->bindParam(':id',$txtId);
+                $sentenceSQL->execute();
+                $book = $sentenceSQL->fetch(PDO::FETCH_LAZY);
+    
+                if(isset($book["image"]) && ($book["image"]!="imagen.jpg")){
+                    if(file_exists("../../img/".$book["image"])) {
+                        unlink("../../img/".$book["image"]);
+                    }
+                }
+
                 $sentenceSQL = $connect->prepare("UPDATE books SET image=:image WHERE id=:id");
-                $sentenceSQL->bindParam(':image',$txtImage);
+                $sentenceSQL->bindParam(':image',$fileName);
                 $sentenceSQL->bindParam(':id',$txtId);
                 $sentenceSQL->execute();
             }
