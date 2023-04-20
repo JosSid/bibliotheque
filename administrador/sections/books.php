@@ -20,7 +20,7 @@
             if($tmpImage!="") {
                 move_uploaded_file($tmpImage,"../../img/".$fileName);
             }
-            $sentenceSQL->bindParam(':image',$txtImage);
+            $sentenceSQL->bindParam(':image',$fileName);
             $sentenceSQL->execute();
             break;
         case "modify":
@@ -51,6 +51,17 @@
 
             break;
         case "delete":
+
+            $sentenceSQL = $connect->prepare("SELECT image FROM books WHERE id=:id");
+            $sentenceSQL->bindParam(':id',$txtId);
+            $sentenceSQL->execute();
+            $book = $sentenceSQL->fetch(PDO::FETCH_LAZY);
+
+            if(isset($book["image"]) && ($book["image"]!="imagen.jpg")){
+                if(file_exists("../../img/".$book["image"])) {
+                    unlink("../../img/".$book["image"]);
+                }
+            }
             $sentenceSQL = $connect->prepare("DELETE FROM books WHERE id=:id");
             $sentenceSQL->bindParam(':id',$txtId);
             $sentenceSQL->execute();
