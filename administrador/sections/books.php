@@ -12,7 +12,14 @@
             $sentenceSQL = $connect->prepare("INSERT INTO books (name,image) VALUES (:name,:image);");
             $sentenceSQL->bindParam(':name',$txtName);
 
-            
+            $date = new DateTime();
+            $fileName = ($txtImage!="")?$date->getTimestamp()."_".$_FILES["txtImage"]["name"]:"imagen.jpg";
+
+            $tmpImage=$_FILES["txtImage"]["tmp_name"];
+
+            if($tmpImage!="") {
+                move_uploaded_file($tmpImage,"../../img/".$fileName);
+            }
             $sentenceSQL->bindParam(':image',$txtImage);
             $sentenceSQL->execute();
             break;
