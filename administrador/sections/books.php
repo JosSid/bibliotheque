@@ -111,8 +111,12 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="txtImage">Image</label>
-                    <?php echo $txtImage ?>
+                    <label for="txtImage">Image: </label>
+                    <?php echo $txtImage; ?>
+                   <br/> 
+                    <?php if($txtImage != "") { ?>
+                        <img src="../../img/<?php echo $fileName;?>" width="50" alt="image" />
+                    <?php } ?>
                     <input type="file" class="form-control"  id="txtImage" name="txtImage" placeholder="Image">
                 </div>
 
@@ -147,9 +151,10 @@
             <tr>
                 <td><?php echo $book['id'];?></td>
                 <td><?php echo $book['name'];?></td>
-                <td><?php echo $book['image'];?></td>
                 <td>
-                    seleccionar|borrar
+                    <img src="../../img/<?php echo $book['image'];?>" width="50" alt="image" />
+                </td>
+                <td>
 
                     <form method="post">
 
