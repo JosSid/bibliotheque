@@ -21,6 +21,13 @@
             echo "presionado boton cancel";
             break;
         case "select":
+            $sentenceSQL = $connect->prepare("SELECT * FROM books WHERE id=:id");
+            $sentenceSQL->bindParam(':id',$txtId);
+            $sentenceSQL->execute();
+            $book = $sentenceSQL->fetch(PDO::FETCH_LAZY);
+
+            $txtName = $book['name'];
+            $txtImage = $book['image'];
             echo "presionado boton select";
             break;
         case "delete":
@@ -46,17 +53,18 @@
 
                 <div class="form-group">
                     <label for="txtId">ID</label>
-                    <input type="text" class="form-control" id="txtId" name="txtId" placeholder="ID">
+                    <input type="text" class="form-control" value="<?php echo $txtId; ?>" id="txtId" name="txtId" placeholder="ID">
                 </div>
 
                 <div class="form-group">
                     <label for="txtName">Name</label>
-                    <input type="text" class="form-control" id="txtName" name="txtName" placeholder="Name">
+                    <input type="text" class="form-control" value="<?php echo $txtName; ?>" id="txtName" name="txtName" placeholder="Name">
                 </div>
 
                 <div class="form-group">
                     <label for="txtImage">Image</label>
-                    <input type="file" class="form-control" id="txtImage" name="txtImage" placeholder="Image">
+                    <?php echo $txtImage ?>
+                    <input type="file" class="form-control"  id="txtImage" name="txtImage" placeholder="Image">
                 </div>
 
                 <div class="btn-group" role="group" aria-label="">
