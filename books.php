@@ -10,7 +10,7 @@
 <?php foreach($listBooks as $book) { ?>
 <div class="col-md-3">
     <div class="card">
-        <img class="card-img-top" src="./img/<?php echo $book['image']; ?>" alt="">
+        <img class="card-img-top" height="400" src="./img/<?php echo $book['image']; ?>" alt="">
         <div class="card-body">
             <h4 class="card-title"><?php echo $book['name']; ?></h4>
             <a name="" id="" class="btn btn-primary" href="https://goalkicker.com/" role="button">See more</a>
